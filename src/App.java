@@ -18,6 +18,7 @@ public class App {
 
                 if(miss1==0){
                     System.out.println("Din attack missade. Du gör ingen skada.");
+                    int attack1 = 0;
                 }else{
                     break;
                 }
@@ -25,9 +26,14 @@ public class App {
                 //Motståndaren:
                 int val1 = tärning.nextInt(6);
                 if(val1==0){        //Försvar
-
+                    int missMf = tärning.nextInt(2);
                 }else{              //Attack
-
+                    int missMa = tärning.nextInt(9);
+                    if(missMa==0){
+                        int attack2 = 0;
+                    }else{
+                        
+                    }
                 }
 
             }else if(svar==2){
