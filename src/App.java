@@ -15,7 +15,7 @@ public class App {
             }else if(svar==2){
 
             }else if(svar==3){
-                System.out.println("\n1. Du börjar med 150 HP. Ditt mål är att få din motståndares HP till 0.\n\n2. Attack har en 90% chans att lyckas. Om lyckad gör du 1-20 skada på motståndaren.\n\n3. Försvar har en 50% chans att lyckas. Om lyckad, halverar du motståndarens attack, och gör att dom inte kan röra sig nästa runda.\n");
+                System.out.println("\n1. Du börjar med 150 HP. Ditt mål är att få din motståndares HP till 0.\n2. Attack har en 90% chans att lyckas. Om lyckad gör du 1-20 skada på motståndaren.\n3. Försvar har en 50% chans att lyckas. Om lyckad, halverar du motståndarens attack, \noch gör att dom inte kan röra sig nästa runda.\n");
 
 
             }else{
