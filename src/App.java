@@ -1,16 +1,34 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner tangentbord = new Scanner(System.in);
+        Random tärning = new Random();
 
         int m=0;
         while(m==0){
             System.out.println("Meny:\n1. Attack\n2. Försvar\n3. Info");
             System.out.println();
             int svar = tangentbord.nextInt();
+            
 
             if(svar==1){
+                int miss1 = tärning.nextInt(10);
+
+                if(miss1==0){
+                    System.out.println("Din attack missade. Du gör ingen skada.");
+                }else{
+                    break;
+                }
+
+                //Motståndaren:
+                int val1 = tärning.nextInt(6);
+                if(val1==0){        //Försvar
+
+                }else{              //Attack
+
+                }
 
             }else if(svar==2){
 
