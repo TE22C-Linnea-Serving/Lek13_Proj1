@@ -4,31 +4,21 @@ import java.util.Scanner;
 public class App {
 
     static void load() throws Exception{
-
-        int l=0;
         
-        do{
+        System.out.print("\nLoading");
+        
         for(int i=0; i<3; i++){
             System.out.print(".");
-            Thread.sleep(300);  
+            Thread.sleep(300);
         }
-        
-        l++;
-    }while(l<3);
-
-
+        System.out.println("\n\n");
     }
-
-
-    private static void While(boolean b) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'While'");
-    }
-
 
     public static void main(String[] args) throws Exception {       //Att göra:
-                                                                    //Skapa en metod för "..."
-                                                                    //fixa flera olika sorters loopar
+                                                                    //Flera olika sorters loopar
+                                                                    //Score system (För hela spelet)
+                                                                    //+ Streak
+                                                                    //Fixa så att motstånaren inte kan röra sig efter lyckat försvar
 
         Scanner tangentbord = new Scanner(System.in);
         Random tärning = new Random();
@@ -45,8 +35,7 @@ public class App {
             nr++;
                
             //Meny:
-            System.out.println("\n\n\n\n");
-            load();
+            System.out.println("\n\n\n");
             System.out.println("Omgång "+nr);
             System.out.println("\nMeny:\n1. Attack\n2. Försvar\n3. Info");          
             System.out.println("\nDu har "+HP1+" HP\nDin motståndare har "+HP2+" HP");
@@ -58,10 +47,12 @@ public class App {
             if(svar==1){                                            //Attack
                 int miss1 = tärning.nextInt(10);              //Ser om miss
 
-                if(miss1==0){                                       //Attacken missar
+                if(miss1==0){  
+                    load();                                     //Attacken missar
                     System.out.println("\nDin attack missade!");
                     attack1 = 0;
-                }else{                                             //Attacken lyckas
+                }else{                      
+                    load();                       //Attacken lyckas
                     attack1 = tärning.nextInt(20);           
                     attack1++;
                     System.out.println("\nDu gör "+attack1+" skada!");
@@ -70,15 +61,18 @@ public class App {
             }else if(svar==2){      //Användaren försvarar
                 int missAF = tärning.nextInt(2);
                 if(missAF==0){      //Misslyckas med försvar
-                    attack1=0;
+                    load();
                     System.out.println("Försvaret misslyckades!");
+                    attack1=0;
                 }else{              //Lyckas med försvar
+                    load();
                     System.out.println("Försvaret lyckades!");
                     attack2/=2;
                     f2=0;
                 }
 
             }else if(svar==3){      //Info
+                load();
                 System.out.println("\n1. Du börjar med 150 HP. Ditt mål är att få din motståndares HP till 0.\n2. Attack har en 90% chans att lyckas. Om lyckad gör du 1-20 skada på motståndaren.\n3. Försvar har en 50% chans att lyckas. Om lyckad, halverar du motståndarens attack, \noch gör att dom inte kan röra sig nästa runda.\n");
 
 
@@ -88,6 +82,7 @@ public class App {
             }
 
         }else{
+            load();
             System.out.println("Du kan inte röra dig denna runda");
             f1=1;
         }
