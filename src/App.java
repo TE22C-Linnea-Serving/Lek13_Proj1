@@ -2,8 +2,33 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class App {
+
+    static void load() throws Exception{
+
+        int l=0;
+        
+        do{
+        for(int i=0; i<3; i++){
+            System.out.print(".");
+            Thread.sleep(300);  
+        }
+        
+        l++;
+    }while(l<3);
+
+
+    }
+
+
+    private static void While(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'While'");
+    }
+
+
     public static void main(String[] args) throws Exception {       //Att göra:
-                                                                    //While loopen fungerar inte (Fixa)
+                                                                    //Skapa en metod för "..."
+                                                                    //fixa flera olika sorters loopar
 
         Scanner tangentbord = new Scanner(System.in);
         Random tärning = new Random();
@@ -13,11 +38,16 @@ public class App {
         int f2=1;
         int HP1 = 150;
         int HP2 = 150;
+        int nr = 0;
 
         while(HP1>0 && HP2>0){
+            
+            nr++;
                
             //Meny:
-            
+            System.out.println("\n\n\n\n");
+            load();
+            System.out.println("Omgång "+nr);
             System.out.println("\nMeny:\n1. Attack\n2. Försvar\n3. Info");          
             System.out.println("\nDu har "+HP1+" HP\nDin motståndare har "+HP2+" HP");
             int svar = tangentbord.nextInt();
@@ -31,7 +61,7 @@ public class App {
                 if(miss1==0){                                       //Attacken missar
                     System.out.println("\nDin attack missade!");
                     attack1 = 0;
-                }else{                                              //Attacken lyckas
+                }else{                                             //Attacken lyckas
                     attack1 = tärning.nextInt(20);           
                     attack1++;
                     System.out.println("\nDu gör "+attack1+" skada!");
