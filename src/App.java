@@ -22,17 +22,21 @@ public class App {
         return info;
     }
 
+    public static void ogiltigtTal(){
+        System.out.println("Du skrev in ett ogiltigt svar. Försök igen");
+        System.out.println();
+    }
 
 
     public static void main(String[] args) throws Exception {
                                                                     
         Scanner tangentbord = new Scanner(System.in);
         Random tärning = new Random();
-        int[] attack = {0,0};       //Attack
-        int[] försvar = {0,0};      //När användaresn[0]- och motståndarens[1] förvsar inte har lyckats
-        int[] HP = {150,150};       //Hälsa
-        int[] totaltPoäng = {0,0};  //Antal vinster och förluster
-        int nr = 0;                 //Antal omgångar
+        int[] attack = {0,0};               //Attack
+        int[] försvar = {0,0};              //När användaresn[0]- och motståndarens[1] förvsar inte har lyckats
+        int[] HP = {150,150};               //Hälsa
+        int[] totaltPoäng = {0,0};          //Antal vinster och förluster
+        int nr = 0;                         //Antal omgångar
 
         while(HP[0]>0 && HP[1]>0){
             nr++;
@@ -93,8 +97,7 @@ public class App {
                     break;
 
                     default:
-                    System.out.println("Du skrev in ett ogitligt tal. Försök igen.");
-                    System.out.println();
+                    ogiltigtTal();
                     nr--;
                     break;
                 }
@@ -109,8 +112,7 @@ public class App {
                     försvar[1]=0;
                     attack[1]=0;
                 }else{
-                    System.out.println("Du skrev in ett ogiltigt tal. Försök igen");
-                    System.out.println();
+                    ogiltigtTal();
                     nr--;
                 }
             }
@@ -223,7 +225,7 @@ public class App {
                             i=1;
                             break;
                         }else{
-                            System.out.println("Du skrev in ett ogiltigt svar. Försök igen");
+                            ogiltigtTal();
                         }
                     }while(i==0);
                 }
