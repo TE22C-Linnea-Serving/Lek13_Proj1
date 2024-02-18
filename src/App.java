@@ -19,7 +19,6 @@ public class App {
                                                                     //switch.case
                                                                     //Array/fält
                                                                     //enkel algoritm
-                                                                    //Typkonvertering
                                                                     //Inga globala variabler
                                                                     //Inparametrar
                                                                     //3 metoder som ger struktur
@@ -59,7 +58,9 @@ public class App {
                 /*-------------------------------------------------------------------------------------
                  * ANVÄNDAREN
                 ---------------------------------------------------------------------------------------*/
-                if(svar==1){                                                //ATTACK
+                switch(svar){
+                    
+                    case 1:                                              //ATTACK
                     int missA1 = tärning.nextInt(10);
                     
                     if(missA1==0){  
@@ -72,7 +73,9 @@ public class App {
                         attack1++;
                         System.out.println("\nDu gör "+attack1+" skada!");
                     }
-                }else if(svar==2){                                          //FÖRSVAR
+                    break;
+                    
+                    case 2:                                         //FÖRSVAR
                     int missA2 = tärning.nextInt(2);
                     
                     if(missA2==0){                                          //Försvaret misslyckas
@@ -85,13 +88,17 @@ public class App {
                         attack2/=2;
                         försvar1=1;
                     }
-                }else if(svar==3){                                          //INFO
+                    break;
+                    
+                    case 3:                                        //INFO
                     load();
                     System.out.println("\n1. Du börjar med 150 HP. Ditt mål är att få motståndarens HP till 0.\n2. Attack har en 90% chans att lyckas. Om lyckad gör du 1-20 skada på motståndaren.\n3. Försvar har en 50% chans att lyckas. Om lyckad, halverar du motståndarens attack, \noch gör att dom inte kan röra sig nästa runda.\n");
                     nr--;
-                }else{
+                    break;
+                    default:
                     System.out.println("Du skrev in ett ogitligt tal. Försök igen.");
                     System.out.println();
+                    break;
                 }
             }else{
                 load();
@@ -161,6 +168,7 @@ public class App {
                             HP2-=attack1;
                         }else{                                                  //Attacken lyckas
                             attack2 = tärning.nextInt(20);
+                            attack2++;
                             attack2/=2;
                             HP1-=attack2;
                             HP2-=attack1;
@@ -189,8 +197,6 @@ public class App {
                     totaltPoäng1++;
                     totaltPoäng2++;
                 }
-            }else if(svar!=3){
-                nr--;
             }
 
             /*-------------------------------------------------------------------------------------
