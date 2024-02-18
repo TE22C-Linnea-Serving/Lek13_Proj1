@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class App {
 
 
-    static void laddar() throws Exception{
+    public static void laddar() throws Exception{
         
         System.out.print("\nLaddar");
         
@@ -16,22 +16,20 @@ public class App {
         System.out.println("\n\n");
     }
 
-    public static String info(String INFO) throws Exception{
+    public static String info(String info) throws Exception{
         laddar();
         System.out.println("\n1. Du börjar med 150 HP. Ditt mål är att få motståndarens HP till 0.\n2. Attack har en 90% chans att lyckas. Om lyckad gör du 1-20 skada på motståndaren.\n3. Försvar har en 50% chans att lyckas. Om lyckad, halverar du motståndarens attack, \noch gör att dom inte kan röra sig nästa runda.\n");
-        return INFO;
+        return info;
     }
 
+
     public static void main(String[] args) throws Exception {       //Att göra:
-                                                                    //Array/fält
                                                                     //3 metoder som ger struktur
-                                                                    //Varje metod gör exact ett jobb
 
                                                                     
         Scanner tangentbord = new Scanner(System.in);
         Random tärning = new Random();
-        int attack1 = 0;        //Användarens attack
-        int attack2 = 0;        //Motståndarens attack  
+        int[] attack = {0,0};        //Attack
         int försvar2=0;         //När motståndarens försvar inte lyckas
         int försvar1=0;         //När användarens försvar inte lyckas
         int HP1 = 150;
@@ -69,12 +67,12 @@ public class App {
                     if(missA1==0){  
                         laddar();                                            //Attacken misslyckas
                         System.out.println("\nDin attack missade!");
-                        attack1 = 0;
+                        attack[0]=0;
                     }else{                      
                         laddar();                                             //Attacken lyckas
-                        attack1 = tärning.nextInt(20);           
-                        attack1++;
-                        System.out.println("\nDu gör "+attack1+" skada!");
+                        attack[0] = tärning.nextInt(20);           
+                        attack[0]++;
+                        System.out.println("\nDu gör "+attack[0]+" skada!");
                     }
                     break;
                     
@@ -84,11 +82,11 @@ public class App {
                     if(missA2==0){                                          //Försvaret misslyckas
                         laddar();
                         System.out.println("Försvaret misslyckades!");
-                        attack1=0;
+                        attack[0]=0;
                     }else{                                                  //Försvaret lyckas
                         laddar();
                         System.out.println("Försvaret lyckades!");
-                        attack2/=2;
+                        attack[1]/=2;
                         försvar1=1;
                     }
                     break;
@@ -97,9 +95,11 @@ public class App {
                     info(null);                                      //INFO
                     nr--;
                     break;
+
                     default:
                     System.out.println("Du skrev in ett ogitligt tal. Försök igen.");
                     System.out.println();
+                    nr--;
                     break;
                 }
             }else{
@@ -107,10 +107,15 @@ public class App {
                     info(null);
                     nr--;
 
-                }else{
+                }else if(svar==1 || svar==2){
                 laddar();
                 System.out.println("Du kan inte röra dig denna runda");
                 försvar2=0;
+                attack[1]=0;
+                }else{
+                    System.out.println("Du skrev in ett ogiltigt tal. Försök igen");
+                    System.out.println();
+                    nr--;
                 }
             }
 
@@ -131,12 +136,12 @@ public class App {
                         
                         if(missM2==0){                                          //Försvar misslyckas
                             System.out.println("försvaret misslyckades!");
-                            HP2-=attack1;
+                            HP2-=attack[0];
                         }else{                                                  //Försvar lyckas
                             System.out.println("försvaret lyckades!");
-                            attack1 /= 2; 
-                            System.out.println("Du gjorde totalt "+attack1+" skada!");
-                            HP2-=attack1;
+                            attack[0] /= 2; 
+                            System.out.println("Du gjorde totalt "+attack[0]+" skada!");
+                            HP2-=attack[0];
 
                             if(svar==1){
                             försvar2 = 1;
@@ -146,15 +151,15 @@ public class App {
                         int missM1 = tärning.nextInt(9);
                         
                         if(missM1==0){                                          //Attacken misslyckas
-                            attack2 = 0;
+                            attack[1] = 0;
                             System.out.println("Din motståndare missar sin attack!");
-                            HP2-=attack1;
+                            HP2-=attack[0];
                         }else{                                                  //Attacken lyckas
-                            attack2 = tärning.nextInt(20);
-                            attack2++;
-                            System.out.println("Din motståndare gör "+attack2+" skada!");
-                            HP2-=attack1;
-                            HP1-=attack2;
+                            attack[1] = tärning.nextInt(20);
+                            attack[1]++;
+                            System.out.println("Din motståndare gör "+attack[1]+" skada!");
+                            HP2-=attack[0];
+                            HP1-=attack[1];
                         }
                     }
                 /*-------------------------------------------------------------------------------------
@@ -162,7 +167,7 @@ public class App {
                 ---------------------------------------------------------------------------------------*/
                 }else if(försvar1==3){                                                //Rundan efter användarens försvar lyckas
                     System.out.println("Motståndaren kan inte röra dig denna runda");
-                    HP2-=attack1;
+                    HP2-=attack[0];
                     försvar1=0;
                 }else if(försvar1==1){                                                //Om användarens försvar lyckades
                     
@@ -173,17 +178,16 @@ public class App {
                         int missM1 = tärning.nextInt(9);
                         
                         if(missM1==0){                                          //Attacken misslyckas
-                            attack2 = 0;
+                            attack[1] = 0;
                             System.out.println("Din motståndare missar sin attack!");
-                            HP2-=attack1;
+                            HP2-=attack[0];
                         }else{                                                  //Attacken lyckas
-                            attack2 = tärning.nextInt(20);
-                            attack2++;
-                            attack2/=2;
-                            HP1-=attack2;
-                            HP2-=attack1;
-                            System.out.println("Din motståndare gör "+attack2+" skada!");
-                        }
+                            attack[1] = tärning.nextInt(20);
+                            attack[1]++;
+                            attack[1]/=2;
+                            HP1-=attack[1];
+                            HP2-=attack[0];
+                            System.out.println("Din motståndare gör "+attack[1]+" skada!");
                     }
 
                     if(försvar1==1){
@@ -196,6 +200,7 @@ public class App {
                  * HÄLSA
                 ---------------------------------------------------------------------------------------*/
 
+            }
                 if(HP1<=0 && HP1<HP2){                                          //FÖRLORADE
                     System.out.println("Du Förlorade!");  
                     totaltPoäng2++;
@@ -207,7 +212,7 @@ public class App {
                     totaltPoäng1++;
                     totaltPoäng2++;
                 }
-            }
+            
 
             /*-------------------------------------------------------------------------------------
              * SPELA IGEN
@@ -239,4 +244,5 @@ public class App {
 
         }
     }
+}
 }
