@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class App {
 
 
@@ -15,9 +16,14 @@ public class App {
         System.out.println("\n\n");
     }
 
+    public static String info(String INFO) throws Exception{
+        laddar();
+        System.out.println("\n1. Du börjar med 150 HP. Ditt mål är att få motståndarens HP till 0.\n2. Attack har en 90% chans att lyckas. Om lyckad gör du 1-20 skada på motståndaren.\n3. Försvar har en 50% chans att lyckas. Om lyckad, halverar du motståndarens attack, \noch gör att dom inte kan röra sig nästa runda.\n");
+        return INFO;
+    }
+
     public static void main(String[] args) throws Exception {       //Att göra:
                                                                     //Array/fält
-                                                                    //Inparametrar
                                                                     //3 metoder som ger struktur
                                                                     //Varje metod gör exact ett jobb
 
@@ -87,9 +93,8 @@ public class App {
                     }
                     break;
 
-                    case 3:                                        //INFO
-                    laddar();
-                    System.out.println("\n1. Du börjar med 150 HP. Ditt mål är att få motståndarens HP till 0.\n2. Attack har en 90% chans att lyckas. Om lyckad gör du 1-20 skada på motståndaren.\n3. Försvar har en 50% chans att lyckas. Om lyckad, halverar du motståndarens attack, \noch gör att dom inte kan röra sig nästa runda.\n");
+                    case 3:  
+                    info(null);                                      //INFO
                     nr--;
                     break;
                     default:
@@ -99,8 +104,7 @@ public class App {
                 }
             }else{
                 if(svar==3){
-                    laddar();
-                    System.out.println("\n1. Du börjar med 150 HP. Ditt mål är att få motståndarens HP till 0.\n2. Attack har en 90% chans att lyckas. Om lyckad gör du 1-20 skada på motståndaren.\n3. Försvar har en 50% chans att lyckas. Om lyckad, halverar du motståndarens attack, \noch gör att dom inte kan röra sig nästa runda.\n");
+                    info(null);
                     nr--;
 
                 }else{
