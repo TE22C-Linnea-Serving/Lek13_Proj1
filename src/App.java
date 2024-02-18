@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class App {
 
+
     static void load() throws Exception{
         
         System.out.print("\nLoading");
@@ -15,39 +16,53 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {       //Att göra:
-                                                                    //Flera olika sorters loopar
+                                                                    //switch.case
+                                                                    //Array/fält
+                                                                    //enkel algoritm
+                                                                    //Typkonvertering
+                                                                    //Inga globala variabler
+                                                                    //Inparametrar
+                                                                    //3 metoder som ger struktur
+                                                                    //Varje metod gör exact ett jobb
+
                                                                     
         Scanner tangentbord = new Scanner(System.in);
         Random tärning = new Random();
         int attack1 = 0;        //Användarens attack
         int attack2 = 0;        //Motståndarens attack  
-        int f1=1;               //När motståndarens försvar inte lyckas
-        int f2=1;               //När användarens försvar inte lyckas
+        int försvar2=0;         //När motståndarens försvar inte lyckas
+        int försvar1=0;         //När användarens försvar inte lyckas
         int HP1 = 150;
         int HP2 = 150;
         int nr = 0;             //Antal omgångar
-        int totalScore1 = 0;    //Användarens antal vinster
-        int totalScore2 = 0;    //Motståndarens antal vinster
+        int totaltPoäng1 = 0;   //Användarens antal vinster
+        int totaltPoäng2 = 0;   //Motståndarens antal vinster
 
-        System.out.println(totalScore1);
+        System.out.println(totaltPoäng1);
         
         while(HP1>0 && HP2>0){
             nr++;
+
             
-            //Meny:
+            /*-------------------------------------------------------------------------------------
+            *MENY
+            ---------------------------------------------------------------------------------------*/
             System.out.println("\n\n\n");
             System.out.println("Omgång "+nr);
             System.out.println("\nMeny:\n1. Attack\n2. Försvar\n3. Info");          
             System.out.println("\nDu har "+HP1+" HP\nDin motståndare har "+HP2+" HP");
             int svar = tangentbord.nextInt();
             
-            if(f1==1){
+            if(försvar2==0){
                 
-                //Användaren
+
+                /*-------------------------------------------------------------------------------------
+                 * ANVÄNDAREN
+                ---------------------------------------------------------------------------------------*/
                 if(svar==1){                                                //ATTACK
-                    int miss1 = tärning.nextInt(10);
+                    int missA1 = tärning.nextInt(10);
                     
-                    if(miss1==0){  
+                    if(missA1==0){  
                         load();                                             //Attacken misslyckas
                         System.out.println("\nDin attack missade!");
                         attack1 = 0;
@@ -58,9 +73,9 @@ public class App {
                         System.out.println("\nDu gör "+attack1+" skada!");
                     }
                 }else if(svar==2){                                          //FÖRSVAR
-                    int missAF = tärning.nextInt(2);
+                    int missA2 = tärning.nextInt(2);
                     
-                    if(missAF==0){                                          //Försvaret misslyckas
+                    if(missA2==0){                                          //Försvaret misslyckas
                         load();
                         System.out.println("Försvaret misslyckades!");
                         attack1=0;
@@ -68,7 +83,7 @@ public class App {
                         load();
                         System.out.println("Försvaret lyckades!");
                         attack2/=2;
-                        f2=0;
+                        försvar1=1;
                     }
                 }else if(svar==3){                                          //INFO
                     load();
@@ -81,20 +96,25 @@ public class App {
             }else{
                 load();
                 System.out.println("Du kan inte röra dig denna runda");
-                f1=1;
+                försvar2=0;
             }
-            
-            //Motståndaren:
+
+
+          
+            /* --------------------------------------------------------------------------------------
+             * MOTSTÅNDAREN
+             ----------------------------------------------------------------------------------------*/
+
             if(svar!=3){                                                //Om användaren inte valde info
                 int val1 = tärning.nextInt(6);
                 
-                if(f2==1){  //Om användarens försvar inte lyckades
+                if(försvar1==0){                                              //Om användarens försvar inte lyckades
                     
                     if(val1==0){                                                //FÖRSVAR
                         System.out.println("\nMotståndaren försvarar...");
-                        int missMf = tärning.nextInt(2);
+                        int missM2 = tärning.nextInt(2);
                         
-                        if(missMf==0){                                          //Försvar misslyckas
+                        if(missM2==0){                                          //Försvar misslyckas
                             System.out.println("försvaret misslyckades!");
                             HP2-=attack1;
                         }else{                                                  //Försvar lyckas
@@ -102,38 +122,40 @@ public class App {
                             attack1 /= 2; 
                             System.out.println("Du gjorde totalt "+attack1+" skada!");
                             HP2-=attack1;
+                            försvar2 = 1;
                             
-                            if(svar==1){
-                                f1 = 0;
-                            }
                         }
                     }else{                                                      //ATTACK
-                        int missMa = tärning.nextInt(9);
+                        int missM1 = tärning.nextInt(9);
                         
-                        if(missMa==0){                                          //Attacken misslyckas
+                        if(missM1==0){                                          //Attacken misslyckas
                             attack2 = 0;
                             System.out.println("Din motståndare missar sin attack!");
                             HP2-=attack1;
                         }else{                                                  //Attacken lyckas
                             attack2 = tärning.nextInt(20);
+                            attack2++;
                             System.out.println("Din motståndare gör "+attack2+" skada!");
                             HP2-=attack1;
                             HP1-=attack2;
                         }
                     }
-                }else if(f2==3){                                                //Rundan efter användarens försvar lyckas
+                /*-------------------------------------------------------------------------------------
+                 * 
+                ---------------------------------------------------------------------------------------*/
+                }else if(försvar1==3){                                                //Rundan efter användarens försvar lyckas
                     System.out.println("Motståndaren kan inte röra dig denna runda");
                     HP2-=attack1;
-                    f2=1;
-                }else if(f2==0){                                                //Om användarens försvar lyckades
+                    försvar1=0;
+                }else if(försvar1==1){                                                //Om användarens försvar lyckades
                     
                     if(val1==0){                                                //Om motståndaren valde försvar
                         System.out.println("Motståndaren försvarar");
-                        f2=1;
+                        försvar1=0;
                     }else{                                                      //Om moståndaren valde attack
-                        int missMa = tärning.nextInt(9);
+                        int missM1 = tärning.nextInt(9);
                         
-                        if(missMa==0){                                          //Attacken misslyckas
+                        if(missM1==0){                                          //Attacken misslyckas
                             attack2 = 0;
                             System.out.println("Din motståndare missar sin attack!");
                             HP2-=attack1;
@@ -146,38 +168,58 @@ public class App {
                         }
                     }
 
-                    if(f2!=1){
-                        f2=3;
+                    if(försvar1!=0){
+                        försvar1=3;           //Gör att motståndaren inte kan göra något nästa runda.
                     }
                 }
-                
-                //Hälsa
+
+
+                /*-------------------------------------------------------------------------------------
+                 * HÄLSA
+                ---------------------------------------------------------------------------------------*/
+
                 if(HP1<=0 && HP1<HP2){                                          //FÖRLORADE
                     System.out.println("Du Förlorade!");  
-                    totalScore2++;
+                    totaltPoäng2++;
                 }else if(HP2<=0 && HP2<HP1){                                    //VANN
                     System.out.println("Du Vann!");
-                    totalScore1++;
+                    totaltPoäng1++;
                 }else if(HP1==HP2 && HP1<=0){                                   //LIKA
                     System.out.println("Det blev lika!");
-                    totalScore1++;
-                    totalScore2++;
+                    totaltPoäng1++;
+                    totaltPoäng2++;
                 }
+            }else if(svar!=3){
+                nr--;
             }
-            if(HP1<=0 || HP2<=0){
-            System.out.println("\nVill du spela igen?");
-            String again = tangentbord.next();
 
-            if(again.equalsIgnoreCase("ja")){
+            /*-------------------------------------------------------------------------------------
+             * SPELA IGEN
+            ---------------------------------------------------------------------------------------*/
+     
+            if(HP1<=0 || HP2<=0){       
+            
+                int i=0;
+                do{
+            System.out.println("\nVill du spela igen?");
+            String igen = tangentbord.next();
+
+        
+            if(igen.equalsIgnoreCase("ja")){
                 HP1=150;
                 HP2=150;
                 nr=0;
                 System.out.println("\n----------------------------------");
-                System.out.println("\n"+totalScore1+" - "+totalScore2);
-            }else{
+                System.out.println("\n"+totaltPoäng1+" - "+totaltPoäng2);
+                i=1;
+            }else if(igen.equalsIgnoreCase("nej")){
+                i=1;
                 break;
+            }else{
+                System.out.println("Du skrev in ett ogiltigt svar. Försök igen");
             }
-        }
+        }while(i==0);
+    }
 
         }
     }
