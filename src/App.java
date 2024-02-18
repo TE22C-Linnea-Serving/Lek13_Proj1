@@ -4,9 +4,9 @@ import java.util.Scanner;
 public class App {
 
 
-    static void load() throws Exception{
+    static void laddar() throws Exception{
         
-        System.out.print("\nLoading");
+        System.out.print("\nLaddar");
         
         for(int i=0; i<3; i++){
             System.out.print(".");
@@ -16,10 +16,7 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {       //Att göra:
-                                                                    //switch.case
                                                                     //Array/fält
-                                                                    //enkel algoritm
-                                                                    //Inga globala variabler
                                                                     //Inparametrar
                                                                     //3 metoder som ger struktur
                                                                     //Varje metod gör exact ett jobb
@@ -64,11 +61,11 @@ public class App {
                     int missA1 = tärning.nextInt(10);
                     
                     if(missA1==0){  
-                        load();                                             //Attacken misslyckas
+                        laddar();                                            //Attacken misslyckas
                         System.out.println("\nDin attack missade!");
                         attack1 = 0;
                     }else{                      
-                        load();                                             //Attacken lyckas
+                        laddar();                                             //Attacken lyckas
                         attack1 = tärning.nextInt(20);           
                         attack1++;
                         System.out.println("\nDu gör "+attack1+" skada!");
@@ -79,19 +76,19 @@ public class App {
                     int missA2 = tärning.nextInt(2);
                     
                     if(missA2==0){                                          //Försvaret misslyckas
-                        load();
+                        laddar();
                         System.out.println("Försvaret misslyckades!");
                         attack1=0;
                     }else{                                                  //Försvaret lyckas
-                        load();
+                        laddar();
                         System.out.println("Försvaret lyckades!");
                         attack2/=2;
                         försvar1=1;
                     }
                     break;
-                    
+
                     case 3:                                        //INFO
-                    load();
+                    laddar();
                     System.out.println("\n1. Du börjar med 150 HP. Ditt mål är att få motståndarens HP till 0.\n2. Attack har en 90% chans att lyckas. Om lyckad gör du 1-20 skada på motståndaren.\n3. Försvar har en 50% chans att lyckas. Om lyckad, halverar du motståndarens attack, \noch gör att dom inte kan röra sig nästa runda.\n");
                     nr--;
                     break;
@@ -101,9 +98,16 @@ public class App {
                     break;
                 }
             }else{
-                load();
+                if(svar==3){
+                    laddar();
+                    System.out.println("\n1. Du börjar med 150 HP. Ditt mål är att få motståndarens HP till 0.\n2. Attack har en 90% chans att lyckas. Om lyckad gör du 1-20 skada på motståndaren.\n3. Försvar har en 50% chans att lyckas. Om lyckad, halverar du motståndarens attack, \noch gör att dom inte kan röra sig nästa runda.\n");
+                    nr--;
+
+                }else{
+                laddar();
                 System.out.println("Du kan inte röra dig denna runda");
                 försvar2=0;
+                }
             }
 
 
@@ -112,7 +116,7 @@ public class App {
              * MOTSTÅNDAREN
              ----------------------------------------------------------------------------------------*/
 
-            if(svar!=3){                                                //Om användaren inte valde info
+            if(svar==1 || svar==2){                                                //Om användaren inte valde info
                 int val1 = tärning.nextInt(6);
                 
                 if(försvar1==0){                                              //Om användarens försvar inte lyckades
@@ -129,8 +133,10 @@ public class App {
                             attack1 /= 2; 
                             System.out.println("Du gjorde totalt "+attack1+" skada!");
                             HP2-=attack1;
+
+                            if(svar==1){
                             försvar2 = 1;
-                            
+                            } 
                         }
                     }else{                                                      //ATTACK
                         int missM1 = tärning.nextInt(9);
@@ -176,7 +182,7 @@ public class App {
                         }
                     }
 
-                    if(försvar1!=0){
+                    if(försvar1==1){
                         försvar1=3;           //Gör att motståndaren inte kan göra något nästa runda.
                     }
                 }
